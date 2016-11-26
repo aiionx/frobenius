@@ -1,6 +1,11 @@
 #include<stdio.h>
 #include<string.h>
 
+
+int gcd(int a, int b) {
+   return (b == 0) ? a : gcd(b, a % b);
+}
+
 void frobenius1(int a, int b){
   printf("%d\n", a * b - a - b);
 }
@@ -60,7 +65,46 @@ void frobenius2(int a, int b, int c, int d){
 }
 
 // Sebastian Böcker & Zsuzsanna Lipták
-void frobenius3(int* a){
+void frobenius3(int* nums){
+  int i,j,d,r,n,q,p,max;
+  int ns[nums[0]];
+  memset(ns,-1,sizeof(ns));
+  ns[0] = 0;
+  for (int i = 1; i < sizeof(nums); i++) {
+      d = gcd(nums[0], nums[i]);
+      for (r = 0; r < d; r++) {
+          n = -1;
+          if (r == 0){
+            n = 0;
+          } else {
+              int q = r;
+              while (q < nums[0]) {
+                  if (ns[q] != -1 && (ns[q] < n || n == -1))
+                      n = ns[q];
+                  q += d;
+              }
+          }
+          if (n != -1)
+              for (j = 0; j < nums[0] / d; j++) {
+                  n += nums[i];
+                  int p = n % nums[0];
+                  if (ns[p] != -1 && (ns[p] < n || n == -1))
+                      n = ns[p];
+                  ns[p] = n;
+              }
+      }
+  }
+  max = 0;
+  for (i = 0; i < nums[0]; i++){
+    if (ns[i] == -1 || ns[i] > max){
+      max = ns[i];
+    }
+  }
+  if (max == -1){
+    printf("Cant find answer");
+  } else {
+    printf("%d\n", max - nums[0]);
+  }
 
 }
 
@@ -69,4 +113,7 @@ void frobenius3(int* a){
 int main(){
   frobenius1(4, 7);
   frobenius2(4, 6, 9, 20);
+  int a[4] = {4, 6, 9, 20};
+  frobenius3(a);
+
 }
