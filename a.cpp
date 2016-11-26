@@ -1,10 +1,10 @@
 #include<stdio.h>
 #include<string.h>
-bool f[10001],ff[1010001];
 int a[4];
 
 
-int main(){
+void frobenius(){
+  bool f[10001],ff[1010001];
   int i,j,k,max,cas,t,x,count,flag;
   memset(f,0,sizeof(f));
   k=0;
@@ -53,4 +53,8 @@ int main(){
   }else{
     printf("%d\n",max);
   }
+}
+
+int main(){
+  frobenius();
 }
