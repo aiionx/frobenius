@@ -6,12 +6,13 @@ int gcd(int a, int b) {
    return (b == 0) ? a : gcd(b, a % b);
 }
 
+// Curran Sharp formula
 void frobenius1(int a, int b){
   printf("%d\n", a * b - a - b);
 }
 
 
-// Unknown algorithm
+// Unknown implementation
 void frobenius2(int a, int b, int c, int d){
   bool f[10001],ff[1010001];
   int i,j,numsLength,max,t,count,flag;
