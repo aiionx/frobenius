@@ -1,15 +1,17 @@
 #include<stdio.h>
 #include<string.h>
 bool f[10001],ff[1010001];
-int a[5];
+int a[4];
+
+
 int main(){
   int i,j,k,max,cas,t,x,count,flag;
   memset(f,0,sizeof(f));
   k=0;
-  for(i=1;i<=4;i++){
+  for(i=0;i < 4;i++){
     scanf("%d",&x);
     if(f[x]==0) {
-      a[++k]=x;
+      a[k++]=x;
       f[x]=1;
     }
   }
@@ -17,10 +19,10 @@ int main(){
   ff[0]=1;
   count=1;
   max=0;
-  for(i=1;i<=1000000;i++){
+  for(i=0; i < 1000000;i++){
     flag=0;
-    for(j=1;j<=k;j++){
-      if(i-a[j] >= 0 && ff[i-a[j]] == 1) {
+    for(j = 0; j < k; j++){
+      if( i-a[j] >= 0 && ff[i-a[j]] == 1) {
         ff[i]=1;
         count++;
         flag=1;
@@ -32,9 +34,9 @@ int main(){
     }
   }
   t=0;
-  for(i=1000000+1;i<=1010000;i++){
+  for(i=1000000; i < 1010000; i++){
     flag=0;
-    for(j=1;j<=k;j++){
+    for(j=1; j <= k; j++){
       if(i-a[j]>=0 && ff[i-a[j]]) {
         flag=1;
         ff[i]=1;
